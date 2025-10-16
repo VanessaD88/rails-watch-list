@@ -1,1 +1,40 @@
-<h1>Index Html</h1>
+<!-- The user can see all lists. Link to add list and show list details. -->
+<div class= "my-navbar">
+  <div class="logo">
+    <%= link_to image_tag("Logo.jpg", alt: "Logo", height: 60), lists_path %>
+  </div>
+  <div class="nav-links">
+    <%= link_to "My lists", lists_path, class: "nav-link"%>
+    <%= link_to "New list", new_list_path, class: "nav-link"%>
+  </div>
+</div>
+
+<!-- Banner -->
+<div class="banner" style="background-image: url('<%= image_path("Movie_Banner.jpg") %>');">
+  <h1>Curate your Watchlist</h1>
+</div>
+
+<!-- Lists Cards -->
+<div class="lists-grid">
+  <% @lists.each do |list| %>
+    <%
+      # Build the expected image filename
+      image_filename = "#{list.name.downcase}.jpg"
+
+      # Check if the file exists in app/assets/images
+      asset_exists = Rails.application.assets.find_asset(image_filename).present? rescue false
+
+      # Use default if not found
+      bg_image = asset_exists ? image_filename : "default.jpg"
+    %>
+
+    <%= link_to list_path(list), class: "list-card", style: "background-image: url('#{image_path(bg_image)}');" do %>
+      <h2><%= list.name %></h2>
+    <% end %>
+  <% end %>
+</div>
+<div class="btn-container">
+  <%= link_to new_list_path, class: "btn" do %>
+    Create a list
+  <% end %>
+</div>

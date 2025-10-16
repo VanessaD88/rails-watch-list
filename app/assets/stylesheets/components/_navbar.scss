@@ -1,3 +1,37 @@
+.my-navbar {
+  background-color: white; /* fix: use background-color, not backgroundcolor */
+  border: red;
+  border-style: solid 2px;
+  display: flex;
+  justify-content: space-between; /* Logo left, links right */
+  align-items: center;
+  padding: 5px 10px;
+
+  .logo img {
+    height: 40px; /* adjust logo size */
+  }
+
+  .nav-links {
+    display: flex;
+    gap: 20px;
+
+    .nav-link {
+      color: darkred;
+      text-decoration: none;
+      font-weight: bold;
+      font-size: 1rem;
+      padding: 5px 10px;
+      transition: background-color 0.2s, color 0.2s;
+      border-radius: 5px;
+
+      &:hover {
+        background-color: darkred;
+        color: #fff;
+      }
+    }
+  }
+}
+
 .navbar-lewagon {
   justify-content: space-between;
   background: white;

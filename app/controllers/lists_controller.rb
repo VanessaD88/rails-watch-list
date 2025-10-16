@@ -1,4 +1,5 @@
 class ListsController < ApplicationController
+  before_action :set_list, only: [:show]
 
   # A user can see all the lists
   def index
@@ -7,6 +8,7 @@ class ListsController < ApplicationController
 
    # A user can see the details of a given list and its name
   def show
+    @bookmark = Bookmark.new # i want to acces @bookmark to add a new bookmark from the list show
   end
 
   # A user can create a new list

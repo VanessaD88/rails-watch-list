@@ -30,6 +30,10 @@ class BookmarksController < ApplicationController
     @bookmark = Bookmark.find(params[:id])
   end
 
+  def set_list
+    @list = List.find(params[:list_id])
+  end
+
   def bookmark_params
     params.require(:bookmark).permit(:comment, :movie_id) # list id we already have because it's nested
   end
