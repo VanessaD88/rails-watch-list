@@ -73,7 +73,7 @@
   }
 }
 
-
+/* Overlay & modal */
 .overlay {
   position: fixed;
   top: 0; left: 0;
@@ -93,7 +93,8 @@
   background: white;
   padding: 2rem;
   border-radius: 10px;
-  width: 400px;
+  width: 600px; /* make the modal wider */
+  max-width: 90%; /* responsive on small screens */
   position: relative;
 }
 
@@ -102,4 +103,46 @@
   top: 10px; right: 15px;
   font-size: 1.5rem;
   cursor: pointer;
+}
+
+/* Review form container */
+.review-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+  margin:20px ;
+}
+
+.new-review textarea {
+  width: 100%;          /* full width of modal */
+  min-width: 500px;     /* wider input field */
+  max-width: 100%;      /* responsive */
+  border-radius: 5px;
+  padding: 0.5rem;
+  box-sizing: border-box;
+}
+
+/* Center the submit button */
+.new-review .form-actions {
+  display: flex;
+  justify-content: center;  /* center button horizontally */
+  margin-top: 1rem;
+}
+
+.reviews-section {
+  display: flex;
+  flex-direction: column;
+  align-items: center; /* center all child elements horizontally */
+  gap: 1rem;           /* space between reviews */
+}
+
+.reviews-section h2 {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.review-card p {
+  text-align: center;
+  margin: 0; /* optional, remove default paragraph margin */
 }
