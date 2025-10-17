@@ -1,4 +1,5 @@
 .banner {
+  position: relative;
   width: 100%;
   height: 300px;
   background-size: cover;
@@ -12,5 +13,18 @@
 
 .banner h1 {
   font-size: 3rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+.banner p {
+  position: absolute;
+  bottom: 15px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 1;
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: bold;
   text-align: center;
 }

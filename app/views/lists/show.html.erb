@@ -1,36 +1,55 @@
 <!-- The user can view all list details. Link to add or delete movie/bookmark. Delete via icon -->
-<h1><%= @list.name %></h1>
+<!-- Navbar-->
+<div class= "my-navbar">
+  <div class="logo">
+    <%= link_to image_tag("Logo.jpg", alt: "Logo", height: 60), lists_path %>
+  </div>
+  <div class="nav-links">
+    <%= link_to "My lists", lists_path, class: "nav-link"%>
+    <%= link_to "New list", new_list_path, class: "nav-link"%>
+  </div>
+</div>
+
+<!-- Banner -->
+<div class="banner" style="background-image: url('<%= image_path("default.jpg") %>');">
+  <h1><%= @list.name %></h1>
+  <p><%= pluralize(@list.bookmarks.count, 'movie') %> in this list</p>
+</div>
 
 <!-- Show existing bookmarks -->
-<h2>Movies in this list</h2>
 
-<% if @list.bookmarks.any? %>
-  <% @list.bookmarks.each do |bookmark| %>
-    <div class="bookmark-card">
-      <% if bookmark.movie.poster_url.present? %>
-        <img src="<%= bookmark.movie.poster_url %>" alt="<%= bookmark.movie.title %>" class="poster">
-      <% end %>
+  <div class="bookmarks-grid">
+    <% @list.bookmarks.each do |bookmark| %>
+      <div class="bookmark-card">
+        <% if bookmark.movie.poster_url.present? %>
+          <img src="<%= bookmark.movie.poster_url %>" alt="<%= bookmark.movie.title %>" class="poster">
+        <% else %>
+          <img src="<%= image_path('default.jpg') %>" alt="Default poster" class="poster">
+        <% end %>
+        <div class="bookmark-info">
+          <h3><%= bookmark.movie.title %></h3>
+          <p class="overview"><%= truncate(bookmark.movie.overview, length: 120) %></p>
+          <p class="rating"><strong>⭐ <%= bookmark.movie.rating %></strong></p>
+          <% if bookmark.comment.present? %>
+            <p class="comment"><em>"<%= bookmark.comment %>"</em></p>
+          <% end %>
+        </div>
 
-      <div class="bookmark-info">
-        <h3><%= bookmark.movie.title %></h3>
-        <p><%= bookmark.movie.overview %></p>
-        <p><strong>Rating:</strong> <%= bookmark.movie.rating %></p>
-        <p><em>Comment:</em> <%= bookmark.comment %></p>
-
-        <!-- Delete bookmark button -->
-        <%= link_to "Delete", bookmark_path(bookmark),
+        <!-- Delete icon in bottom-right corner -->
+        <%= link_to bookmark_path(bookmark),
                     data: { turbo_method: :delete, turbo_confirm: "Are you sure?" },
-                    class: "btn btn-danger" %>
+                    class: "delete-icon" do %>
+          <i class="fa-solid fa-trash"></i>
+        <% end %>
       </div>
-    </div>
+    <% end %>
+  </div>
+
+<div class="btn-container">
+    <!-- Add new bookmark button -->
+  <%= link_to new_list_bookmark_path(@list), class: "btn" do %>
+    Add a movie
   <% end %>
-<% else %>
-  <p>No movies yet.</p>
-<% end %>
-
-<%= link_to "Back to all lists", lists_path, class: "btn btn-secondary" %>
-
-<!-- Add new bookmark button -->
-<%= link_to new_list_bookmark_path(@list), class: "btn" do %>
-  Add a movie
-<% end %>
+  <!-- Back to list button -->
+  <%= link_to "Back to all lists", lists_path, class: "btn btn-secondary" %>
+</div>
