@@ -47,9 +47,23 @@
 
 <div class="btn-container">
     <!-- Add new bookmark button -->
-  <%= link_to new_list_bookmark_path(@list), class: "btn" do %>
-    Add a movie
-  <% end %>
+  <button id="open-form" class="btn">Add a movie</button>
   <!-- Back to list button -->
   <%= link_to "Back to all lists", lists_path, class: "btn btn-secondary" %>
+</div>
+
+<!-- Hidden overlay form -->
+<div id="form-overlay" class="overlay hidden">
+  <div class="form-popup">
+    <span id="close-form" class="close-btn">&times;</span>
+    <h2>Add a movie to <%= @list.name %></h2>
+
+    <%= simple_form_for [@list, @bookmark] do |f| %>
+      <%= f.association :movie, collection: Movie.all, prompt: "Select a movie", label: "Movie" %>
+      <%= f.input :comment, label: "Comment", placeholder: "Comment about this movie" %>
+      <div class="form-actions">
+        <%= f.submit "Add movie", class: "btn btn-primary" %>
+      </div>
+    <% end %>
+  </div>
 </div>
